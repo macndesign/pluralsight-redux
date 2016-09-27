@@ -20,7 +20,7 @@ class ManageCoursePage extends Component {
   render() {
     return (
       <CourseForm
-        allAuthors={[]}
+        allAuthors={this.props.authors}
         course={this.state.course}
         errors={this.state.errors}
         onSave=""
@@ -29,12 +29,24 @@ class ManageCoursePage extends Component {
   }
 }
 
-ManageCoursePage.propTypes = {};
+ManageCoursePage.propTypes = {
+  course: PropTypes.object.isRequired,
+  authors: PropTypes.array.isRequired
+};
 
 function mapStateToProps(state, ownProps) {
   let course = {id: '', watchHref: '', title: '', authorId: '', length: '', category: ''};
+
+  const authorsFormattedForDropdown = state.authors.map(author => {
+    return {
+      value: author.id,
+      text: `${author.firstName} ${author.lastName}`
+    };
+  });
+
   return {
-    state: course
+    course: course,
+    authors: authorsFormattedForDropdown
   };
 }
 
