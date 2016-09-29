@@ -9,7 +9,11 @@ class LoadingDots extends Component {
 
     this.state = {
       frame: 1
-    }
+    };
+  }
+
+  componentWillMount() {
+    clearInterval(this.interval);
   }
 
   componentDidMount() {
@@ -18,10 +22,6 @@ class LoadingDots extends Component {
         frame: this.state.frame + 1
       });
     }, this.props.interval);
-  }
-
-  componentWillMount() {
-    clearInterval(this.interval);
   }
 
   render() {
